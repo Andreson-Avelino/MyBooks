@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo_mybooks"
+    tools:context=".CadastroLivroActivity">
+
+    <TextView
+        android:id="@+id/textTituloCadastro"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/cabecalho_mybooks"
+        android:gravity="center"
+        android:text="@string/titulo_cadastro"
+        android:textColor="@color/texto_mybooks"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTituloLivro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/botao_mybooks"
+        android:hint="@string/campo_titulo"
+        android:inputType="textCapSentences"
+        android:padding="12dp"
+        android:textColor="@color/texto_mybooks"
+        android:textColorHint="@color/texto_mybooks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTituloCadastro" />
+
+    <EditText
+        android:id="@+id/editAutorLivro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/botao_mybooks"
+        android:hint="@string/campo_autor"
+        android:inputType="textCapWords"
+        android:padding="12dp"
+        android:textColor="@color/texto_mybooks"
+        android:textColorHint="@color/texto_mybooks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTituloLivro" />
+
+    <EditText
+        android:id="@+id/editSinopseLivro"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/botao_mybooks"
+        android:gravity="top|start"
+        android:hint="@string/campo_sinopse"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:textColor="@color/texto_mybooks"
+        android:textColorHint="@color/texto_mybooks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editAutorLivro" />
+
+    <Button
+        android:id="@+id/buttonSalvarLivro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/botao_mybooks"
+        android:text="@string/salvar_livro"
+        android:textColor="@color/texto_mybooks"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editSinopseLivro" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

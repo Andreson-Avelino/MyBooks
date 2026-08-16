@@ -6,4 +6,5 @@
     <color name="texto_mybooks">#000000</color>
     <color name="cinza_mybooks">#D9D9D9</color>
     <color name="destaque_mybooks">#E8608C</color>
+    <color name="cabecalho_mybooks">#71CBC4</color>
 </resources>

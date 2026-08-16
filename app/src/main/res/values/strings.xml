@@ -4,4 +4,17 @@
     <string name="cadastrar_livro">Cadastrar Livro</string>
     <string name="favoritos">Favoritos</string>
     <string name="inicio">Início</string>
+    <string name="titulo_cadastro">Cadastrar Livro</string>
+    <string name="campo_titulo">Título do Livro</string>
+    <string name="campo_autor">Autor</string>
+    <string name="campo_sinopse">Sinopse</string>
+    <string name="salvar_livro">Salvar Livro</string>
+    <string name="detalhes_livro">Detalhes do Livro</string>
+    <string name="autor_livro">Autor</string>
+    <string name="sinopse_livro">Sinopse</string>
+    <string name="favoritar">Favoritar</string>
+    <string name="excluir_livro">Excluir Livro</string>
+    <string name="titulo_favoritos">Favoritos</string>
+    <string name="nenhum_favorito">Nenhum livro favorito ainda</string>
+
 </resources>

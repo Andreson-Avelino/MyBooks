@@ -10,13 +10,14 @@
 
     <TextView
         android:id="@+id/textTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/cabecalho_mybooks"
+        android:gravity="center"
         android:text="@string/app_name"
+        android:textColor="@color/texto_mybooks"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/texto_mybooks"
-        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -78,6 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonFavoritos"
         app:layout_constraintStart_toEndOf="@id/buttonInicio" />
+
 
     <Button
         android:id="@+id/buttonFavoritos"
