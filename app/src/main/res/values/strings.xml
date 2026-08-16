@@ -16,5 +16,9 @@
     <string name="excluir_livro">Excluir Livro</string>
     <string name="titulo_favoritos">Favoritos</string>
     <string name="nenhum_favorito">Nenhum livro favorito ainda</string>
+    <string name="desfavoritar">Desfavoritar</string>
+    <string name="livro_adicionado_favoritos">Livro adicionado aos favoritos</string>
+    <string name="livro_removido_favoritos">Livro removido dos favoritos</string>
+    <string name="livro_nao_encontrado">Livro não encontrado</string>
 
 </resources>
