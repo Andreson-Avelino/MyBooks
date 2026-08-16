@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="fundo_mybooks">#FFF9F4</color>
+    <color name="botao_mybooks">#71CBC4</color>
+    <color name="texto_mybooks">#000000</color>
+    <color name="cinza_mybooks">#D9D9D9</color>
+    <color name="destaque_mybooks">#E8608C</color>
+</resources>

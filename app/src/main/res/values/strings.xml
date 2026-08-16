@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MY BOOKS</string>
+    <string name="meus_livros">MEUS LIVROS</string>
+    <string name="cadastrar_livro">Cadastrar Livro</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="inicio">Início</string>
+</resources>
