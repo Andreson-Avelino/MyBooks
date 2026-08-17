@@ -26,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Localiza o TextView usado para informar quando não existem livros cadastrados.
+        textListaVazia =
+            findViewById(R.id.textListaVazia)
+
         // Configura o banco, o RecyclerView e o Adapter da tela principal.
         livroDAO = LivroDAO(this)
         val recyclerLivros =
