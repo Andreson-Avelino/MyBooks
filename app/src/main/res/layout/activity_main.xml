@@ -35,6 +35,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textTitulo" />
 
+    <TextView
+        android:id="@+id/textListaVazia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nenhum_livro"
+        android:textColor="@color/texto_mybooks"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/buttonCadastrarLivro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textMeusLivros" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLivros"
         android:layout_width="0dp"

@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybooks.adapter.LivroAdapter
 import com.example.mybooks.database.LivroDAO
+import android.view.View
+import android.widget.TextView
 class MainActivity : AppCompatActivity() {
 
     // Mantém o acesso ao banco e o adaptador da lista de livros.
     private lateinit var livroDAO: LivroDAO
     private lateinit var livroAdapter: LivroAdapter
+
+    private lateinit var textListaVazia: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +70,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
-    // Busca os livros salvos no SQLite e atualiza o RecyclerView.
+    // Busca os livros e controla a mensagem exibida quando a lista está vazia.
     private fun carregarLivros() {
+
         val livros = livroDAO.listarTodos()
+
         livroAdapter.atualizarLista(livros)
+        if (livros.isEmpty()) {
+            textListaVazia.visibility =
+                View.VISIBLE
+        } else {
+            textListaVazia.visibility =
+                View.GONE
+        }
     }
     // Atualiza a lista sempre que a MainActivity volta a ficar visível.
     override fun onResume() {

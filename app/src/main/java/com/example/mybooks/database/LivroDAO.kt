@@ -59,6 +59,38 @@ class LivroDAO(context: Context) {
         return listaLivros
     }
 
+    // Busca somente os livros que estão marcados como favoritos.
+    fun listarFavoritos(): List<Livro> {
+        val listaFavoritos = mutableListOf<Livro>()
+        val db = databaseHelper.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM livros WHERE favorito = 1 ORDER BY titulo ASC",
+            null
+        )
+        cursor.use {
+            while (it.moveToNext()) {
+                val livro = Livro(
+                    id = it.getInt(
+                        it.getColumnIndexOrThrow("id")
+                    ),
+                    titulo = it.getString(
+                        it.getColumnIndexOrThrow("titulo")
+                    ),
+                    autor = it.getString(
+                        it.getColumnIndexOrThrow("autor")
+                    ),
+                    sinopse = it.getString(
+                        it.getColumnIndexOrThrow("sinopse")
+                    ),
+                    favorito = true
+                )
+                listaFavoritos.add(livro)
+            }
+        }
+        db.close()
+        return listaFavoritos
+    }
+
     // Busca um livro específico no banco usando o seu ID.
     fun buscarPorId(id: Int): Livro? {
         val db = databaseHelper.readableDatabase
@@ -109,5 +141,16 @@ class LivroDAO(context: Context) {
         )
         db.close()
         return linhasAtualizadas
+    }
+    // Exclui um livro do banco usando o seu ID.
+    fun excluirLivro(id: Int): Int {
+        val db = databaseHelper.writableDatabase
+        val linhasExcluidas = db.delete(
+            "livros",
+            "id = ?",
+            arrayOf(id.toString())
+        )
+        db.close()
+        return linhasExcluidas
     }
 }

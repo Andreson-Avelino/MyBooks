@@ -20,5 +20,12 @@
     <string name="livro_adicionado_favoritos">Livro adicionado aos favoritos</string>
     <string name="livro_removido_favoritos">Livro removido dos favoritos</string>
     <string name="livro_nao_encontrado">Livro não encontrado</string>
+    <string name="livro_excluido_sucesso">Livro excluído com sucesso</string>
+    <string name="erro_excluir_livro">Erro ao excluir livro</string>
+    <string name="titulo_excluir_livro">Excluir livro</string>
+    <string name="confirmacao_excluir_livro">Tem certeza que deseja excluir este livro?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="excluir">Excluir</string>
+    <string name="nenhum_livro">Nenhum livro cadastrado ainda.</string>
 
 </resources>
