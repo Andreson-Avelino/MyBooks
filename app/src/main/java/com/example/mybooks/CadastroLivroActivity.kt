@@ -10,7 +10,11 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.mybooks.database.LivroDAO
 import com.example.mybooks.model.Livro
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.example.mybooks.api.GoogleBooksResponse
+import com.example.mybooks.api.RetrofitClient
 class CadastroLivroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,98 @@ class CadastroLivroActivity : AppCompatActivity() {
         val buttonSalvarLivro =
             findViewById<Button>(R.id.buttonSalvarLivro)
         val livroDAO = LivroDAO(this)
+        val editPesquisaLivro =
+            findViewById<EditText>(R.id.editPesquisaLivro)
+        val buttonBuscarLivro =
+            findViewById<Button>(R.id.buttonBuscarLivro)
+
+        // Pesquisa um livro na Google Books API e preenche os campos do cadastro.
+        buttonBuscarLivro.setOnClickListener {
+
+            val pesquisa =
+                editPesquisaLivro.text.toString().trim()
+
+            if (pesquisa.isEmpty()) {
+
+                Toast.makeText(
+                    this,
+                    R.string.pesquisar_livro,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return@setOnClickListener
+            }
+
+            // Obtém a chave configurada localmente e realiza a pesquisa na Google Books API.
+            val apiKey = getString(R.string.google_books_api_key)
+
+            RetrofitClient.googleBooksApi
+                .buscarLivros(
+                    pesquisa,
+                    apiKey
+                )
+                .enqueue(
+
+                    object : Callback<GoogleBooksResponse> {
+
+                        override fun onResponse(
+                            call: Call<GoogleBooksResponse>,
+                            response: Response<GoogleBooksResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                val livros =
+                                    response.body()?.items
+
+                                if (!livros.isNullOrEmpty()) {
+                                    val livroEncontrado =
+                                        livros.first().volumeInfo
+                                    editTituloLivro.setText(
+                                        livroEncontrado.title ?: ""
+                                    )
+                                    editAutorLivro.setText(
+                                        livroEncontrado.authors
+                                            ?.joinToString(", ")
+                                            ?: ""
+                                    )
+                                    editSinopseLivro.setText(
+                                        livroEncontrado.description
+                                            ?: ""
+                                    )
+                                    Toast.makeText(
+                                        this@CadastroLivroActivity,
+                                        R.string.livro_encontrado,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+
+                                    // Exibe o código HTTP para identificar problemas na comunicação com a API.
+                                    Toast.makeText(
+                                        this@CadastroLivroActivity,
+                                        "Erro HTTP: ${response.code()}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            } else {
+                                Toast.makeText(
+                                    this@CadastroLivroActivity,
+                                    R.string.erro_busca_livro,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                        override fun onFailure(
+                            call: Call<GoogleBooksResponse>,
+                            t: Throwable
+                        ) {
+                            Toast.makeText(
+                                this@CadastroLivroActivity,
+                                R.string.erro_busca_livro,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                )
+        }
 
         // Valida os campos, cria um objeto Livro e salva os dados no banco SQLite.
         buttonSalvarLivro.setOnClickListener {

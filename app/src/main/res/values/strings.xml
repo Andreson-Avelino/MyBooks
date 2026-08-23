@@ -27,5 +27,10 @@
     <string name="cancelar">Cancelar</string>
     <string name="excluir">Excluir</string>
     <string name="nenhum_livro">Nenhum livro cadastrado ainda.</string>
+    <string name="buscar_livro">Buscar Livro</string>
+    <string name="pesquisar_livro">Digite o título ou ISBN</string>
+    <string name="livro_encontrado">Livro encontrado</string>
+    <string name="livro_nao_encontrado_api">Nenhum livro encontrado</string>
+    <string name="erro_busca_livro">Erro ao buscar livro</string>
 
 </resources>
