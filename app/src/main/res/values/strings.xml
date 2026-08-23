@@ -32,5 +32,7 @@
     <string name="livro_encontrado">Livro encontrado</string>
     <string name="livro_nao_encontrado_api">Nenhum livro encontrado</string>
     <string name="erro_busca_livro">Erro ao buscar livro</string>
+    <string name="capa_livro">Capa do livro</string>
+    <string name="resultados_busca">Resultados da busca</string>
 
 </resources>

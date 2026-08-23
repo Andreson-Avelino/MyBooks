@@ -53,6 +53,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editPesquisaLivro" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerResultadosBusca"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonBuscarLivro" />
+
     <EditText
         android:id="@+id/editTituloLivro"
         android:layout_width="0dp"
@@ -68,7 +80,7 @@
         android:textColorHint="@color/texto_mybooks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonBuscarLivro" />
+        app:layout_constraintTop_toBottomOf="@id/recyclerResultadosBusca" />
 
     <EditText
         android:id="@+id/editAutorLivro"

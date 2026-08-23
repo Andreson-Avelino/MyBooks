@@ -58,4 +58,5 @@ dependencies {
     // Permite fazer requisições HTTP e converter o JSON recebido pela API.
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.glide)
 }

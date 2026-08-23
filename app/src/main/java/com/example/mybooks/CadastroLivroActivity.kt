@@ -15,7 +15,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.example.mybooks.api.GoogleBooksResponse
 import com.example.mybooks.api.RetrofitClient
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mybooks.adapter.ResultadoBuscaAdapter
+
 class CadastroLivroActivity : AppCompatActivity() {
+
+    private lateinit var resultadoBuscaAdapter: ResultadoBuscaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,24 +45,48 @@ class CadastroLivroActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.editPesquisaLivro)
         val buttonBuscarLivro =
             findViewById<Button>(R.id.buttonBuscarLivro)
+        val recyclerResultadosBusca =
+            findViewById<RecyclerView>(R.id.recyclerResultadosBusca)
+
+        // Configura a lista de resultados e define o que acontece quando o usuário escolhe um livro.
+        resultadoBuscaAdapter =
+            ResultadoBuscaAdapter(emptyList()) { livroSelecionado ->
+                val info = livroSelecionado.volumeInfo
+                editTituloLivro.setText(
+                    info.title ?: ""
+                )
+                editAutorLivro.setText(
+                    info.authors?.joinToString(", ") ?: ""
+                )
+                editSinopseLivro.setText(
+                    info.description ?: ""
+                )
+                recyclerResultadosBusca.visibility =
+                    View.GONE
+                Toast.makeText(
+                    this,
+                    R.string.livro_encontrado,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        recyclerResultadosBusca.layoutManager =
+            LinearLayoutManager(this)
+        recyclerResultadosBusca.adapter =
+            resultadoBuscaAdapter
 
         // Pesquisa um livro na Google Books API e preenche os campos do cadastro.
         buttonBuscarLivro.setOnClickListener {
-
             val pesquisa =
                 editPesquisaLivro.text.toString().trim()
 
             if (pesquisa.isEmpty()) {
-
                 Toast.makeText(
                     this,
                     R.string.pesquisar_livro,
                     Toast.LENGTH_SHORT
                 ).show()
-
                 return@setOnClickListener
             }
-
             // Obtém a chave configurada localmente e realiza a pesquisa na Google Books API.
             val apiKey = getString(R.string.google_books_api_key)
 
@@ -72,44 +103,34 @@ class CadastroLivroActivity : AppCompatActivity() {
                             call: Call<GoogleBooksResponse>,
                             response: Response<GoogleBooksResponse>
                         ) {
+
                             if (response.isSuccessful) {
                                 val livros =
                                     response.body()?.items
 
+                                // Exibe os resultados encontrados pela Google Books API.
                                 if (!livros.isNullOrEmpty()) {
-                                    val livroEncontrado =
-                                        livros.first().volumeInfo
-                                    editTituloLivro.setText(
-                                        livroEncontrado.title ?: ""
-                                    )
-                                    editAutorLivro.setText(
-                                        livroEncontrado.authors
-                                            ?.joinToString(", ")
-                                            ?: ""
-                                    )
-                                    editSinopseLivro.setText(
-                                        livroEncontrado.description
-                                            ?: ""
-                                    )
-                                    Toast.makeText(
-                                        this@CadastroLivroActivity,
-                                        R.string.livro_encontrado,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
+                                    resultadoBuscaAdapter
+                                        .atualizarResultados(livros)
 
-                                    // Exibe o código HTTP para identificar problemas na comunicação com a API.
+                                    recyclerResultadosBusca.visibility =
+                                        View.VISIBLE
+                                } else {
+                                    recyclerResultadosBusca.visibility =
+                                        View.GONE
                                     Toast.makeText(
                                         this@CadastroLivroActivity,
-                                        "Erro HTTP: ${response.code()}",
-                                        Toast.LENGTH_LONG
+                                        R.string.livro_nao_encontrado_api,
+                                        Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             } else {
+                                recyclerResultadosBusca.visibility =
+                                    View.GONE
                                 Toast.makeText(
                                     this@CadastroLivroActivity,
-                                    R.string.erro_busca_livro,
-                                    Toast.LENGTH_SHORT
+                                    "Erro HTTP: ${response.code()}",
+                                    Toast.LENGTH_LONG
                                 ).show()
                             }
                         }
