@@ -142,6 +142,34 @@ class LivroDAO(context: Context) {
         db.close()
         return linhasAtualizadas
     }
+
+    // Atualiza título, autor e sinopse de um livro existente no SQLite.
+    fun atualizarInformacoes(
+        id: Int,
+        titulo: String,
+        autor: String,
+        sinopse: String
+    ): Int {
+        if (titulo.isBlank()) {
+            return 0
+        }
+
+        val db = databaseHelper.writableDatabase
+        val valores = ContentValues().apply {
+            put("titulo", titulo.trim())
+            put("autor", autor.trim())
+            put("sinopse", sinopse.trim())
+        }
+        val linhasAtualizadas = db.update(
+            "livros",
+            valores,
+            "id = ?",
+            arrayOf(id.toString())
+        )
+        db.close()
+        return linhasAtualizadas
+    }
+
     // Exclui um livro do banco usando o seu ID.
     fun excluirLivro(id: Int): Int {
         val db = databaseHelper.writableDatabase

@@ -13,18 +13,62 @@ import com.example.mybooks.adapter.LivroAdapter
 import com.example.mybooks.database.LivroDAO
 import android.view.View
 import android.widget.TextView
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import androidx.appcompat.app.AlertDialog
+
 class MainActivity : AppCompatActivity() {
 
     // Mantém o acesso ao banco e o adaptador da lista de livros.
     private lateinit var livroDAO: LivroDAO
     private lateinit var livroAdapter: LivroAdapter
-
     private lateinit var textListaVazia: TextView
+
+    // Verifica se existe uma rede com capacidade de acesso à internet.
+    private fun possuiConexaoInternet(): Boolean {
+
+        val connectivityManager = getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+        val redeAtiva =
+            connectivityManager.activeNetwork ?: return false
+        val capacidades =
+            connectivityManager.getNetworkCapabilities(redeAtiva)
+                ?: return false
+
+        return capacidades.hasCapability(
+            NetworkCapabilities.NET_CAPABILITY_INTERNET
+        ) && capacidades.hasCapability(
+            NetworkCapabilities.NET_CAPABILITY_VALIDATED
+        )
+    }
+    // Exibe um aviso quando o aplicativo é aberto sem conexão.
+    private fun verificarModoOffline() {
+
+        if (!possuiConexaoInternet()) {
+            AlertDialog.Builder(this)
+                .setTitle("Você está offline")
+                .setMessage(
+                    "O MyBooks está funcionando em modo offline. " +
+                            "Algumas funcionalidades estão limitadas.\n\n" +
+                            "Você ainda pode visualizar, cadastrar, " +
+                            "favoritar e excluir livros normalmente.\n\n" +
+                            "A pesquisa online de livros ficará " +
+                            "indisponível até que a conexão seja restabelecida."
+                )
+                .setPositiveButton("Entendi", null)
+                .show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // Verifica a conexão e informa quando o aplicativo está offline.
+        verificarModoOffline()
 
         // Localiza o TextView usado para informar quando não existem livros cadastrados.
         textListaVazia =
@@ -67,7 +111,6 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(intent)
         }
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -78,7 +121,6 @@ class MainActivity : AppCompatActivity() {
     private fun carregarLivros() {
 
         val livros = livroDAO.listarTodos()
-
         livroAdapter.atualizarLista(livros)
         if (livros.isEmpty()) {
             textListaVazia.visibility =

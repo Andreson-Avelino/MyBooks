@@ -1,114 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!-- Permite rolar a tela quando o conteúdo ultrapassa a altura disponível. -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fundo_mybooks"
+    android:fillViewport="true"
+    android:clipToPadding="false"
     tools:context=".DetalhesLivroActivity">
 
-    <TextView
-        android:id="@+id/textTituloDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:background="@color/cabecalho_mybooks"
-        android:gravity="center"
-        android:text="@string/detalhes_livro"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Organiza as informações e os botões verticalmente. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textNomeLivroDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTituloDetalhes"
-        tools:text="O Pequeno Príncipe" />
+        <!-- Cabeçalho principal da tela. -->
+        <TextView
+            android:id="@+id/textTituloDetalhes"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@color/cabecalho_mybooks"
+            android:gravity="center"
+            android:text="@string/detalhes_livro"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textAutorDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textNomeLivroDetalhes"
-        tools:text="Antoine de Saint-Exupéry" />
+        <!-- Exibe o título do livro selecionado. -->
+        <TextView
+            android:id="@+id/textNomeLivroDetalhes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTituloDetalhes"
+            tools:text="O Pequeno Príncipe" />
 
-    <TextView
-        android:id="@+id/textLabelSinopse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/sinopse_livro"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textAutorDetalhes" />
+        <!-- Exibe o nome do autor do livro. -->
+        <TextView
+            android:id="@+id/textAutorDetalhes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textNomeLivroDetalhes"
+            tools:text="Antoine de Saint-Exupéry" />
 
-    <TextView
-        android:id="@+id/textSinopseDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:lineSpacingExtra="4dp"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textLabelSinopse"
-        tools:text="Um pequeno príncipe deixa seu asteroide e viaja por diferentes mundos, conhecendo personagens e refletindo sobre amizade, amor e relações humanas." />
+        <!-- Identifica a seção da sinopse. -->
+        <TextView
+            android:id="@+id/textLabelSinopse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/sinopse_livro"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textAutorDetalhes" />
 
-    <Button
-        android:id="@+id/buttonFavoritarDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/destaque_mybooks"
-        android:text="@string/favoritar"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textSinopseDetalhes" />
+        <!-- Exibe a sinopse completa, mesmo quando for longa. -->
+        <TextView
+            android:id="@+id/textSinopseDetalhes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textLabelSinopse"
+            tools:text="Um pequeno príncipe deixa seu asteroide e viaja por diferentes mundos, conhecendo personagens e refletindo sobre amizade, amor e relações humanas." />
 
-    <Button
-        android:id="@+id/buttonExcluirLivro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/cinza_mybooks"
-        android:text="@string/excluir_livro"
-        android:textColor="@color/texto_mybooks"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonFavoritarDetalhes" />
+        <!-- Permite favoritar ou desfavoritar o livro. -->
+        <Button
+            android:id="@+id/buttonFavoritarDetalhes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/destaque_mybooks"
+            android:text="@string/favoritar"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSinopseDetalhes" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Abre a edição manual ou online do livro. -->
+        <Button
+            android:id="@+id/buttonEditarLivro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/cabecalho_mybooks"
+            android:text="Editar Livro"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonFavoritarDetalhes" />
+
+        <!-- Exclui o livro após confirmação do usuário. -->
+        <Button
+            android:id="@+id/buttonExcluirLivro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/cinza_mybooks"
+            android:text="@string/excluir_livro"
+            android:textColor="@color/texto_mybooks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonEditarLivro"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
