@@ -59,27 +59,6 @@ CREATE TABLE livros (
 
 Observação: a rotina atual de atualização do banco (onUpgrade) exclui e recria a tabela livros; portanto, uma futura mudança de versão pode apagar os registros locais se não for implementada uma migração de dados.
 
-Organização do código:
-app/src/main/
-├── java/com/example/mybooks/
-│   ├── MainActivity.kt
-│   ├── CadastroLivroActivity.kt
-│   ├── DetalhesLivroActivity.kt
-│   ├── FavoritosActivity.kt
-│   ├── adapter/
-│   │   ├── LivroAdapter.kt
-│   │   └── ResultadoBuscaAdapter.kt
-│   ├── api/
-│   │   ├── GoogleBooksApi.kt
-│   │   ├── GoogleBooksResponse.kt
-│   │   └── RetrofitClient.kt
-│   ├── database/
-│   │   ├── DatabaseHelper.kt
-│   │   └── LivroDAO.kt
-│   └── model/
-│       └── Livro.kt
-└── res/                 # Layouts, imagens e outros recursos Android
-
 Links:
 - Código-fonte: https://github.com/Andreson-Avelino/MyBooks
 - Versão para instalação: https://github.com/Andreson-Avelino/MyBooks/releases/tag/v1.0.0
